@@ -7,11 +7,11 @@ def checkPort(ip,port,show,log):
     s.close()
 
     if check == 0:
+        try:
+            hostname = socket.gethostbyaddr(ip)
+        except:
+            hostname = ip
         if show:
-            try:
-                hostname = socket.gethostbyaddr(ip)
-            except:
-                hostname = ip
             print("Host: "+str(ip)+":"+str(port)+" => Open | Hostname: "+str(hostname))
         log.append({
             "host":str(ip),
