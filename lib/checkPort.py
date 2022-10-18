@@ -8,9 +8,14 @@ def checkPort(ip,port,show,log):
 
     if check == 0:
         if show:
-            print("Host: "+str(ip)+":"+str(port)+" => Open")
+            try:
+                hostname = socket.gethostbyaddr(ip)
+            except:
+                hostname = ip
+            print("Host: "+str(ip)+":"+str(port)+" => Open | Hostname: "+str(hostname))
         log.append({
             "host":str(ip),
+            "hostname":hostname,
             "port":{
                 "nr":int(port),
                 "status":"Open"
